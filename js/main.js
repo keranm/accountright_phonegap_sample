@@ -77,7 +77,7 @@ var appEngine = {
 		console.log("Child Browser");
 		
 		// we are going to use a childBrowser so we can rip the code out of the URL 
-		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id=ew59q4vmuzss7nuyhm8t7st7&redirect_uri=http%3A%2F%2Fdesktop%2F&response_type=code&scope=CompanyFile', { showLocationBar: true });
+		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id=ew59q4vmuzss7nuyhm8t7st7&redirect_uri=http%3A%2F%2Fdesktop&response_type=code&scope=CompanyFile', { showLocationBar: true });
 
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
