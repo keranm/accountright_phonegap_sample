@@ -99,6 +99,10 @@ var appEngine = {
 				$('.code').html(loc)
 		    } */
 		}
+
+		window.plugins.childBrowser.close = function(loc){
+			$('.code').html('window closed'+loc)
+		}
 	}, // secureMYOB
 } // end our engine
 
