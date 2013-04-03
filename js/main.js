@@ -65,7 +65,7 @@ var appEngine = {
 			// bind the secureMYOB function to the button click
 			$('#linkButton').on('click', function(){
 				appEngine.secureMYOB()
-				return false // this prevents the default button behaviour
+				return false // prevent the default browser action
 			})
 
 			$('#welcome').css('display', 'block')
