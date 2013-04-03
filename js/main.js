@@ -62,11 +62,24 @@ var appEngine = {
 		} else {
 			// if NO (there are NO access tokens) then show the welcome screen
 
+			// bind the secureMYOB function to the button click
+			$('#linkButton').on('click', function(){
+				appEngine.secureMYOB()
+				return false // this prevents the default button behaviour
+			})
+
 			$('#welcome').css('display', 'block')
 		} // end check for accessTokens
 		
 	}, // show Welcome
+
+	secureMYOB : function() {
+		// we are going to use a childBrowser so we can rip the code out of the URL 
+		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id=ew59q4vmuzss7nuyhm8t7st7&redirect_uri=http%3A%2F%2Fdesktop%2F&response_type=code&scope=CompanyFile', { showLocationBar: true });
+	}, // secureMYOB
 } // end our engine
+
+
 
 //
 // are we ready? lets go
@@ -75,6 +88,8 @@ var appEngine = {
 $(document).ready(function(){
 	appEngine.init()
 }) // end document ready
+
+
 
 
 

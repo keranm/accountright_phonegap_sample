@@ -63,3 +63,8 @@
 #welcome {
     z-index: 100; /* lets make sure the main page is on top */
 }
+
+#welcome .jumbotron {
+    padding-left: 15px;
+    padding-right: 15px;
+}
