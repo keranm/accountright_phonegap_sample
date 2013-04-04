@@ -85,7 +85,7 @@ var appEngine = {
 
 	secureMYOB : function() {
 		console.log("Child Browser");
-		
+		var html = ''
 		// we are going to use a childBrowser so we can rip the code out of the URL 
 		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: true });
 
@@ -96,11 +96,11 @@ var appEngine = {
 				console.log('code found')
 				var code = loc.split('code=')
 				console.log(code[1])
-				$('.code').html('Code: '+code[1]+'<br />Location: '+loc)
+				html += 'Code: '+code[1]+'<br />Location: '+loc
 				window.plugins.childBrowser.close()
 			} else {
 				console.log('code not found')
-				$('.code').html('code not found')
+				html += ('code not found')
 				window.plugins.childBrowser.close()
 			}
 			/*
@@ -111,7 +111,9 @@ var appEngine = {
 		}
 
 		window.plugins.childBrowser.close = function(loc){
-			$('.code').html('window closed'+loc)
+			html += ('window closed'+loc)
+			$('.code').html(html)
+
 		}
 	}, // secureMYOB
 } // end our engine
