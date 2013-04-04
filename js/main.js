@@ -16,7 +16,7 @@
 //
 var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
 var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
-var theAPIredirect = 'http://desktop/' // a url that exists but doesn't really
+var theAPIredirect = 'http://www.keranmckenzie.com/' // a url that exists but doesn't really
 var theAPIredirect_encoded = encodeURIComponent(theAPIredirect) // make sure 
 
 
