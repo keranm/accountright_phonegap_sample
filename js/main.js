@@ -172,7 +172,7 @@ var appEngine = {
           }
         });
 
-        var response = appEngine.getURL(oauthServer, false)
+        var response = appEngine.getURL(oauthServer, 'POST' false)
 
         // lets dump out the response
         appEngine.hideAll()
@@ -193,16 +193,18 @@ var appEngine = {
           }
         });
 
-        var response = appEngine.getURL(oauthServer, false)
+        var response = appEngine.getURL(oauthServer, 'POST', false)
 
+        /*
         // lets dump out the response
         appEngine.hideAll()
 		$('#main').css('display', 'block')
 		$('#main #content').html(data)
+		*/
 	}, // getRefreshToken
 
 	// expects headers as bool, url as string
-	getURL : function(url, headers) {
+	getURL : function(url, type, headers) {
 
 		// do we need the headers or not?
 		if(headers) {
@@ -217,16 +219,26 @@ var appEngine = {
 
         $.ajax
         ({
-			type: "GET",
+			type: type,
 			url: url,
 			dataType: 'json',
 			async: true,
 			success: function(data) {
 				// done, we have the data return it
+
+		        appEngine.hideAll()
+				$('#main').css('display', 'block')
+				$('#main #content').html('<h2>Success</h2>'+data)
+
 				return data
 			},
 			error: function(data) {
 				// there was an error - handle it
+
+				appEngine.hideAll()
+				$('#main').css('display', 'block')
+				$('#main #content').html('<div class="alert alert-error"><h2>Success</h2></div>'+data)
+
 				return data
 			}
       });
