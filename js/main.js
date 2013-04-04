@@ -16,7 +16,7 @@
 //
 var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
 var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
-var theAPIredirect = 'http://nowhere.keranmckenzie.com/' // a url that exists but doesn't really
+var theAPIredirect = 'http://desktop' // a url that exists but doesn't really
 var theAPIredirect_encoded = encodeURIComponent(theAPIredirect) // make sure 
 
 
@@ -98,7 +98,7 @@ var appEngine = {
 				//console.log(code[1])
 				html += '<br />Code: '+code[1]+'<br />Location: '+loc
 				
-				window.plugins.childBrowser.close()
+				window.plugins.childBrowser.close();
 
 			} else {
 				html += ('<br />code not found<br />')
