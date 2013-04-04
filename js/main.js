@@ -17,7 +17,7 @@
 var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
 var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
 var theAPIredirect = 'http://www.keranmckenzie.com/' // a url that exists but doesn't really
-var theAPIredirect_encoded = encodeURIComponent(theAPIredirect) // make sure 
+var theAPIredirect_encoded = encodeURIComponent( theAPIredirect ) // make sure 
 
 var accessCode = ''
 // lets fetch the accessToken out of localstorage if we have it
@@ -72,9 +72,9 @@ var appEngine = {
 		$('#loading').css('display', 'block')
 
 		// now lets show our Welcome page while we set everything else up
-		if( loading_msg() == messages.default_loading() ) {
+		if( loading_msg == messages.default_loading ) {
 			// show the deafult message & then the home screen
-			$('.loading_msg').html( loading_msg() )
+			$('.loading_msg').html( loading_msg )
 			setTimeout(function() { 
 				$('#loading').css('display', 'none')
 				// right, we are done, show the welcome page
@@ -82,7 +82,7 @@ var appEngine = {
 			}, loadingOffset)
 		} else {
 			// show the message and wait, the engine will take care of the rest
-			$('.loading_msg').html( loading_msg() )
+			$('.loading_msg').html( loading_msg )
 		}
 
 	}, // end show the loading screen
@@ -103,10 +103,10 @@ var appEngine = {
 			})
 			// put the message in place
 			if(message) {
-				$('#welcome .lead_msg').html( message() )
+				$('#welcome .lead_msg').html( message )
 			} else {
 				// load the default
-				$('#welcome .lead_msg').html( messages.initial_welcome() )
+				$('#welcome .lead_msg').html( messages.initial_welcome )
 			}
 			$('#welcome').css('display', 'block')
 		} // end check for accessTokens
@@ -120,7 +120,7 @@ var appEngine = {
 	secureMYOB : function() {
 
 		// we are going to use a childBrowser so we can rip the code out of the URL 
-		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: false, showNavigationBar: false, showAddress: false });
+		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: false, showNavigationBar: false, showAddress: false })
 
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
@@ -130,7 +130,9 @@ var appEngine = {
 				var code = loc.split('?code=')
 				//console.log(code[1])
 				accessCode = code[1]
-				// close the childbrowser
+				// close the childbrowser - by forcing it to load a local blank.html first
+				window.plugins.childBrowser.showWebPage(('blank.html', { showLocationBar: false, showNavigationBar: false, showAddress: false })
+
 				window.plugins.childBrowser.close()
 
 				// now do the oauth token fetching
@@ -143,6 +145,7 @@ var appEngine = {
 				//    error here is the user hit NO instead of YES
 				appEngine.showWelcome( messages.error_oauth_denied )
 				// close the childbrowser
+				window.plugins.childBrowser.showWebPage(('blank.html', { showLocationBar: false, showNavigationBar: false, showAddress: false })
 				window.plugins.childBrowser.close()
 
 			} else {
@@ -162,7 +165,7 @@ var appEngine = {
 //
 // document.ready used for testing in browser
 $(document).ready(function(){
-	appEngine.init( messages.default_loading )
+	appEngine.init( )
 }) // end document ready
 
 
@@ -174,21 +177,13 @@ $(document).ready(function(){
 
 var messages = {
 
-	initial_welcome : function() {
-		return 'To make full use of the awsesomeness of the cloud, bring together the power of MYOB AccountRight Live and our App of Awesome and watch business financial magic happen.';
-	}, 
+	'initial_welcome' : 'To make full use of the awsesomeness of the cloud, bring together the power of MYOB AccountRight Live and our App of Awesome and watch business financial magic happen.',
 
-	error_oauth_denied : function() {
-		return '<div class="alert alert-error"><strong>Access Denied</strong><br />It seems you have declined access for this app to talk to your company files.<br />That is a shame, I\'m sad now.</div><p><strong>Want to try again?</strong> hit the button below to try again</p>'
-	},
+	'error_oauth_denied' : '<div class="alert alert-error"><strong>Access Denied</strong><br />It seems you have declined access for this app to talk to your company files.<br />That is a shame, I\'m sad now.</div><p><strong>Want to try again?</strong> hit the button below to try again</p>',
+	
+	'default_loading' : 'Setting Up App',
 
-	default_loading : function() {
-		return 'Setting Up App'
-	},
-
-	oauth_token_fetching : function() {
-		return 'The Hamsters are off fetching data'
-	}
+	'oauth_token_fetching' : 'The Hamsters are off fetching data',
 
 } // end messages
 
