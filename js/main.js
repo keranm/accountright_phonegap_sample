@@ -93,15 +93,15 @@ var appEngine = {
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
 
 		    if( loc.indexOf(theAPIredirect + '?code') === 0 ){
-				console.log('code found')
+				//console.log('code found')
 				var code = loc.split('code=')
-				console.log(code[1])
-				html += 'Code: '+code[1]+'<br />Location: '+loc
-				window.plugins.childBrowser.close();
+				//console.log(code[1])
+				html += '<br />Code: '+code[1]+'<br />Location: '+loc
+				
+				window.plugins.childBrowser.close()
+
 			} else {
-				console.log('code not found')
-				html += ('code not found')
-				window.plugins.childBrowser.close();
+				html += ('<br />code not found<br />')
 			}
 			/*
 		    if (loc.indexOf(serverUrl + '/?code') === 0) { 
