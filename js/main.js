@@ -92,16 +92,16 @@ var appEngine = {
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
 
-		    if( loc.indexOf('/?code') != 0 ){
+		    if( loc.indexOf(theAPIredirect + '?code') === 0 ){
 				console.log('code found')
 				var code = loc.split('code=')
 				console.log(code[1])
 				html += 'Code: '+code[1]+'<br />Location: '+loc
-				window.plugins.childBrowser.close()
+				window.plugins.childBrowser.close();
 			} else {
 				console.log('code not found')
 				html += ('code not found')
-				window.plugins.childBrowser.close()
+				window.plugins.childBrowser.close();
 			}
 			/*
 		    if (loc.indexOf(serverUrl + '/?code') === 0) { 
