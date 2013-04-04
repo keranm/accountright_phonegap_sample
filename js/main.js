@@ -16,7 +16,7 @@
 //
 var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
 var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
-var theAPIredirect = 'http://desktop' // a url that exists but doesn't really
+var theAPIredirect = 'http://desktop/' // a url that exists but doesn't really
 var theAPIredirect_encoded = encodeURIComponent(theAPIredirect) // make sure 
 
 
@@ -86,11 +86,13 @@ var appEngine = {
 	secureMYOB : function() {
 		console.log("Child Browser");
 		var html = ''
+
+		var cb = window.plugins.childBrowser;
 		// we are going to use a childBrowser so we can rip the code out of the URL 
-		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: true });
+		cb.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: true });
 
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
-		window.plugins.childBrowser.onLocationChange = function(loc){ 
+		cb.onLocationChange = function(loc){ 
 
 		    if( loc.indexOf(theAPIredirect + '?code') === 0 ){
 				//console.log('code found')
@@ -98,7 +100,7 @@ var appEngine = {
 				//console.log(code[1])
 				html += '<br />Code: '+code[1]+'<br />Location: '+loc
 				
-				window.plugins.childBrowser.close();
+				cb.close();
 
 			} else {
 				html += ('<br />code not found<br />')
@@ -110,7 +112,7 @@ var appEngine = {
 		    } */
 		}
 
-		window.plugins.childBrowser.close = function(loc){
+		window.plugins.childBrowser.onClose = function(loc){
 			html += ('window closed'+loc)
 			$('.code').html(html)
 
