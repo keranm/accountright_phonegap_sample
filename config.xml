@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.keranmckenzie.accountrightAPISample"
         versionCode="10" 
-        version   = "0.0.2">
+        version   = "0.0.3">
 
     <name>AccountRight PhoneGap Sample</name>
 
@@ -26,7 +26,7 @@
     <feature name="http://api.phonegap.com/1.0/network"/>
 
     <gap:plugin name="ChildBrowser" />
-
+    <!-- 
     <icon src="icon.png" />
     <icon src="icons/ios/icon.png" width="57" height="57" />
     <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
@@ -35,7 +35,7 @@
     <icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
     <icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
 
-    <!-- Splash Screens -->
+    <!-- Splash Screens 
     <gap:splash src="splash.png" />
     <gap:splash src="splash/ios/Default-Landscape.png" width="1024" height="768" />
     <gap:splash src="splash/ios/Default-Portrait.png" width="768" height="1024" />
@@ -45,5 +45,6 @@
     <gap:splash src="splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
     <gap:splash src="splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
     <gap:splash src="splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+    -->
 
 </widget>

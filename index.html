@@ -13,19 +13,19 @@
 
         <!-- phone gap stuff here -->
         <script src="phonegap.js"></script>
-        <script src="childbrowser.js"></script><!-- we use this for the ouath flow -->
+        <script src="childbrowser.js"></script><!-- we use this phonegap plugin for the ouath flow -->
     </head>
     <body class="container">
         <div id="loading" class="page">
             <div class="spinner"><img src="img/spinner.gif" width="24" height="24" /></div>
-            <h3 class="muted">Setting Up</h3>
+            <h3 class="muted loading_msg"></h3>
         </div><!-- loading page -->
         <div id="welcome" class="page">
             <div class="topBar alert">
                 <h3>App Of Awesome</h3>
             </div><!-- end top bar -->
             <div class="jumbotron">
-              <p class="lead">To make full use of the awsesomeness of the cloud, bring together the power of MYOB AccountRight Live and our App of Awesome and watch business financial magic happen.</p>
+              <p class="lead lead_msg"></p>
               <p class="centered"><a class="btn btn-large btn-success" href="#" id="linkButton">Click here to link with<br />MYOB AccountRight Live now</a></p>
               <p class="code"></p>
             </div>
@@ -33,7 +33,8 @@
 <hr>
         </div><!-- welcome page -->
 
-        <script src="js/zepto.js"></script> <!-- zepto is much lighter than jquery, but is jquery compatible & works with BootStrap -->
+        <script src="js/zepto.js"></script> <!-- http://zeptojs.com is much lighter than jquery, but is jquery compatible & works with BootStrap -->
+        <!-- <script src="js/lawnchair.js"></script> <!-- http://brian.io/lawnchair is a lightweight data storage abstraction tool -->
         <script src="js/main.js"></script> <!-- main js for our app -->
     </body>
 </html>
