@@ -141,6 +141,8 @@ var appEngine = {
 				appEngine.showLoading( messages.oauth_token_fetching )
 				$('#loading').css('display', 'block')
 
+				appEngine.getAccessToken()
+
 
 			} else if( loc.indexOf(theAPIredirect + '?error') === 0 ){
 				// there was an errror - handle it
