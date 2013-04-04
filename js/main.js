@@ -112,7 +112,7 @@ var appEngine = {
 		    } */
 		}
 
-		window.plugins.childBrowser.onClose = function(loc){
+		window.plugins.childBrowser.onClose = function(loc, html){
 			html += ('window closed'+loc)
 			$('.code').html(html)
 
