@@ -172,7 +172,7 @@ var appEngine = {
           }
         });
 
-        var response = appEngine.getURL(oauthServer, 'POST' false)
+        var response = appEngine.getURL(oauthServer, 'POST', false)
 
         // lets dump out the response
         appEngine.hideAll()
