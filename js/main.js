@@ -94,7 +94,7 @@ var appEngine = {
 
 		    if( loc.indexOf('/?code') != 0 ){
 				console.log('code found')
-				var code = url.split('code=')
+				var code = loc.split('code=')
 				console.log(code[1])
 				$('.code').html('Code: '+code[1]+'<br />Location: '+loc)
 				window.plugins.childBrowser.close()
