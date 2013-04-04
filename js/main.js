@@ -10,6 +10,16 @@
 //
 // define our variables
 //
+
+//
+// API Speicific Vars
+//
+var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
+var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
+var theAPIredirect = 'http://nowhere.keranmckenzie.com/' // a url that exists but doesn't really
+var theAPIredirect_encoded = encodeURI(theAPIredirect) // make sure 
+
+
 // we want to ensure a tight fit on all mobiles, so lets set the sizes right
 var width = window.innerWidth
 var height = window.innerHeight // use native JS not any plugin to get the right sizes
@@ -77,7 +87,7 @@ var appEngine = {
 		console.log("Child Browser");
 		
 		// we are going to use a childBrowser so we can rip the code out of the URL 
-		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id=ew59q4vmuzss7nuyhm8t7st7&redirect_uri=http%3A%2F%2Fdesktop&response_type=code&scope=CompanyFile', { showLocationBar: true });
+		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: true });
 
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
