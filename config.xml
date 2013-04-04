@@ -7,7 +7,7 @@
 
     <name>AccountRight PhoneGap Sample</name>
 
-    <description>A quick example showing how to connect to the MYOB AccountRight Services using PhoneGap (buitl with Adobe's build.phonegap.com service)</description>
+    <description>A quick example showing how to connect to the MYOB AccountRight Services using PhoneGap (built with Adobe's build.phonegap.com service)</description>
 
     <author href="http://www.keranmckenzie.com/" email="developers@myob.com">
         Keran McKenzie
