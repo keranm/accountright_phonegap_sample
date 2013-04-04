@@ -17,7 +17,7 @@
 var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
 var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
 var theAPIredirect = 'http://nowhere.keranmckenzie.com/' // a url that exists but doesn't really
-var theAPIredirect_encoded = encodeURI(theAPIredirect) // make sure 
+var theAPIredirect_encoded = encodeURIcomponent(theAPIredirect) // make sure 
 
 
 // we want to ensure a tight fit on all mobiles, so lets set the sizes right
