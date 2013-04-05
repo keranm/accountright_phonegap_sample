@@ -54,7 +54,7 @@ var appEngine = {
 		$('.page').css('height', height)
 
 		// show the loading screen
-		 appEngine.showLoading( messages.default_loading )
+		appEngine.showLoading( messages.default_loading )
 		//appEngine.getAccessToken()
 		
 		
@@ -162,9 +162,18 @@ var appEngine = {
 	getAccessToken : function() {
 		
 		// setup the headers for getting the AccessToken
-		var theData = oauthServer+'/?client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+		var theData = {
+            'client_id': theAPIkey,
+            'client_secret': theAPIsecret,
+            'scope': 'CompanyFile',
+            'code': accessCode,
+            'redirect_uri': theAPIredirect_encoded,
+            'grant_type': 'authorization_code',
+          }
+
+        console.log( serialize(theData) )
 		
-        var response = appEngine.getURL(oauthServer, 'POST', theData, false)
+        var response = appEngine.getURL(oauthServer, 'POST', serialize(theData), false)
 
 	}, // getAccessToken
 
@@ -187,7 +196,7 @@ var appEngine = {
         ({
 			type: type,
 			url: url,
-			dataType: 'json',
+			dataType: 'html',
 			data: theData,
 			async: true,
 			success: function(data) {
@@ -262,6 +271,14 @@ Storage.prototype.getObject = function(key) {
     var value = this.getItem(key);
     return value && JSON.parse(value);
 }
+
+serialize = function(obj) {
+  var str = [];
+  for(var p in obj)
+     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+  return str.join("&");
+}
+
 
 //
 // Ability to Base64 encode
