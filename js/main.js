@@ -195,7 +195,7 @@ var appEngine = {
         $.ajax
         ({
 			type: type,
-			url: url,
+			url: url+'/?'+theData,
 			dataType: 'html',
 			data: theData,
 			async: true,
