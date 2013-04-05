@@ -160,7 +160,7 @@ var appEngine = {
 	}, // secureMYOB
 
 	getAccessToken : function() {
-		
+		/*
 		// setup the headers for getting the AccessToken
 		var theData = {
             'client_id': theAPIkey,
@@ -172,14 +172,16 @@ var appEngine = {
           }
 
         console.log( serialize(theData) )
-		
-        var response = appEngine.getURL(oauthServer, 'POST', serialize(theData), false)
+		*/
+		var theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+
+        var response = appEngine.getURL(oauthServer, 'POST', theData, false)
 
 	}, // getAccessToken
 
 	getRefreshToken : function() {
 		
-        var response = appEngine.getURL(oauthServer, 'POST', false)
+        //var response = appEngine.getURL(oauthServer, 'POST', false)
 
         /*
         // lets dump out the response
@@ -192,11 +194,12 @@ var appEngine = {
 	// expects headers as bool, url as string
 	getURL : function(url, type, theData, headers) {
 
+		console.log( theData )
+
         $.ajax
         ({
 			type: type,
 			url: url,
-			dataType: 'html',
 			data: theData,
 			async: true,
 			success: function(data) {
