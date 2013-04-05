@@ -284,11 +284,12 @@ var appEngine = {
 		   $.ajax({
 				  type: "POST",
 				  url: oauthServer,
+				  contentType: 'application/x-www-form-urlencoded',
 				  data: {
 					   client_id    : theAPIkey,
 					   client_secret: theAPIsecret,	
 					   code         : accessCode,
-					   redirect_uri : theAPIredirect,
+					   redirect_uri : theAPIredirect_encoded,
 					   grant_type   : 'authorization_code',
 					   scope		: 'CompanyFile'			  
 				   },
@@ -298,12 +299,11 @@ var appEngine = {
 			    	// temporary storing access token
 			    	appEngine.hideAll()
 					$('#main').css('display', 'block')
-					$('#main #content').html('<h2>Success</h2>'+data)
-					console.log(data)
+					$('#main #content').html('<h2>Success</h2>'+ JSON.stringify(data))
 
 					return data
 			   	},
-			    error: function(xhr, textStatus) {
+			    error: function(xhr) {
 			    	console.log("Token request error ?? >>" + xhr.responseText);
 			    	appEngine.hideAll()
 					$('#main').css('display', 'block')

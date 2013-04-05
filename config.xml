@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.keranmckenzie.accountrightAPISample"
         versionCode="10" 
-        version   = "0.0.08">
+        version   = "0.0.09">
 
     <name>AccountRight PhoneGap Sample</name>
 
