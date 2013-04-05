@@ -35,7 +35,7 @@ if(localStorage.getItem("accessToken")) {
 
 var theData = ''
 
-accessCode = 'p2hL!IAAAAAxiQ_wYMNYEMCkuEPT2lklIxrbxxk3nmgc6pKPVmH3BAQEAAAFQQr4X6Qvmm8Wp4suSwpnOkDSdJLoQf7xW8ViU7dhg2F_WyIAO4Qpr3a27YQpMNklzKm8SNLBobHAMkhZ7h3sYbY2JT3NZizjvJL6tP2qvF3enpUbG87VsL7H1DL9nEPM1XPfAFRGLZVuKy52RikcG8UnD-9lYB_D7pPm3Z1pXW2smG6goy0w_KY8GiIem4H40oryqf5h3rAJZo07qEfMKqLXKsBFSjQyrNxyQdbhGTNNavIEsCaKKJ1duEFM0du9NTR7AGcEnOA7gAJ4KaDa2YnvW0FxBzZ_ezmpJdkHwPWKo_N9z7-kKdtnoWJqfAqekIoDB782NFPkxNWHI7hxu'
+accessCode = 'p2hL!IAAAAIM-vWOl4rB3w-igRkXUaLyqPR7xqSV-sD86BaZkW5d2AQEAAAGORB-c1HiB5DJs3z0dbs85YkW9ONPk4g1vg4jMn-s3_cBfON7RO4IiroouQxWW0f7dJMz6l3bhSYwnbZA1_qV2mMT9ZKubF5rvvjnmhdgs6bj8QtEIARZkmbDWGm_R9gjq1R29uTH3UxHlPdCrePS4UCxTE3DLv68nvzyLBU9CrJNhMWh4cO_0BDQeeBtoCpx5bDXtiaAwIlS_KMwT9tW3-7xSWIvzNvQYyYHuhJ5XOFXBatAP68E92PlQYDHgZBGV21p3awwT7X_6x5YKCN3KOJspPOMtRxuoo6BVgEqMkzsCWPLxCdGUJ-SZx4IyXIdzAW-2xx6zhxuUJr2bw1Ok'
 
 
 // we want to ensure a tight fit on all mobiles, so lets set the sizes right
@@ -175,7 +175,7 @@ var appEngine = {
 */
           //console.log( $.param( theData)  )
           theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+encodeURIComponent(theAPIredirect)+'&grant_type=authorization_code'
-
+          console.log(theData)
           appEngine.getURL( theData  );//oauthServer, 'POST', theData, false)
         
  /*
