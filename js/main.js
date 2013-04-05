@@ -33,6 +33,8 @@ if(localStorage.getItem("accessToken")) {
 	var cfCredentials = ''
 }
 
+var theData = ''
+
 accessCode = 'p2hL!IAAAAAxiQ_wYMNYEMCkuEPT2lklIxrbxxk3nmgc6pKPVmH3BAQEAAAFQQr4X6Qvmm8Wp4suSwpnOkDSdJLoQf7xW8ViU7dhg2F_WyIAO4Qpr3a27YQpMNklzKm8SNLBobHAMkhZ7h3sYbY2JT3NZizjvJL6tP2qvF3enpUbG87VsL7H1DL9nEPM1XPfAFRGLZVuKy52RikcG8UnD-9lYB_D7pPm3Z1pXW2smG6goy0w_KY8GiIem4H40oryqf5h3rAJZo07qEfMKqLXKsBFSjQyrNxyQdbhGTNNavIEsCaKKJ1duEFM0du9NTR7AGcEnOA7gAJ4KaDa2YnvW0FxBzZ_ezmpJdkHwPWKo_N9z7-kKdtnoWJqfAqekIoDB782NFPkxNWHI7hxu'
 
 
@@ -160,7 +162,7 @@ var appEngine = {
 	}, // secureMYOB
 
 	getAccessToken : function() {
-		/*
+		
 		// setup the headers for getting the AccessToken
 		var theData = {
             'client_id': theAPIkey,
@@ -171,12 +173,18 @@ var appEngine = {
             'grant_type': 'authorization_code',
           }
 
+          console.log( $.param( theData)  )
+
+          var response = appEngine.getURL(oauthServer, 'POST', $.param( theData), false)
+         /*
         console.log( serialize(theData) )
-		*/
 		
-		var theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+encodeURIComponent(theAPIredirect)+'&grant_type=authorization_code'
+		
+		theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+encodeURIComponent(theAPIredirect)+'&grant_type=authorization_code'
 
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
+
+        */
 
 	}, // getAccessToken
 
@@ -191,7 +199,7 @@ var appEngine = {
 		$('#main #content').html(data)
 		*/
 
-		var theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&refresh_token='+refreshToken+'&grant_type=authorization_code'
+		theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&refresh_token='+refreshToken+'&grant_type=authorization_code'
 
 	}, // getRefreshToken
 
@@ -202,9 +210,11 @@ var appEngine = {
 
         $.ajax
         ({
-			type: type,
+			type: 'POST',
 			url: oauthServer,
 			data: theData,
+			contentType: 'application/x-www-form-urlencoded',
+			dataType: 'json',
 			async: true,
 			success: function(data) {
 				// done, we have the data return it
@@ -219,11 +229,12 @@ var appEngine = {
 			error: function(data) {
 				// there was an error - handle it
 
+				console.log(data)
+
 				appEngine.hideAll()
 				$('#main').css('display', 'block')
-				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2></div>' + data.response )
-				console.log(data)
-				console.log(data.response)
+				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2>' + data.response +'</div>sent: ' +theData )
+
 
 				return data
 			}
