@@ -35,7 +35,7 @@ if(localStorage.getItem("accessToken")) {
 
 var theData = ''
 
-accessCode = 'p2hL!IAAAAIM-vWOl4rB3w-igRkXUaLyqPR7xqSV-sD86BaZkW5d2AQEAAAGORB-c1HiB5DJs3z0dbs85YkW9ONPk4g1vg4jMn-s3_cBfON7RO4IiroouQxWW0f7dJMz6l3bhSYwnbZA1_qV2mMT9ZKubF5rvvjnmhdgs6bj8QtEIARZkmbDWGm_R9gjq1R29uTH3UxHlPdCrePS4UCxTE3DLv68nvzyLBU9CrJNhMWh4cO_0BDQeeBtoCpx5bDXtiaAwIlS_KMwT9tW3-7xSWIvzNvQYyYHuhJ5XOFXBatAP68E92PlQYDHgZBGV21p3awwT7X_6x5YKCN3KOJspPOMtRxuoo6BVgEqMkzsCWPLxCdGUJ-SZx4IyXIdzAW-2xx6zhxuUJr2bw1Ok'
+//accessCode = 'p2hL!IAAAAIM-vWOl4rB3w-igRkXUaLyqPR7xqSV-sD86BaZkW5d2AQEAAAGORB-c1HiB5DJs3z0dbs85YkW9ONPk4g1vg4jMn-s3_cBfON7RO4IiroouQxWW0f7dJMz6l3bhSYwnbZA1_qV2mMT9ZKubF5rvvjnmhdgs6bj8QtEIARZkmbDWGm_R9gjq1R29uTH3UxHlPdCrePS4UCxTE3DLv68nvzyLBU9CrJNhMWh4cO_0BDQeeBtoCpx5bDXtiaAwIlS_KMwT9tW3-7xSWIvzNvQYyYHuhJ5XOFXBatAP68E92PlQYDHgZBGV21p3awwT7X_6x5YKCN3KOJspPOMtRxuoo6BVgEqMkzsCWPLxCdGUJ-SZx4IyXIdzAW-2xx6zhxuUJr2bw1Ok'
 
 
 // we want to ensure a tight fit on all mobiles, so lets set the sizes right
@@ -56,8 +56,8 @@ var appEngine = {
 		$('.page').css('height', height)
 
 		// show the loading screen
-		//appEngine.showLoading( messages.default_loading )
-		appEngine.getAccessToken()
+		appEngine.showLoading( messages.default_loading )
+		//appEngine.getAccessToken()
 		
 		
 	}, // end our init function
