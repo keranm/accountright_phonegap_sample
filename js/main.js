@@ -165,17 +165,17 @@ var appEngine = {
 		
 		// setup the headers for getting the AccessToken
 		var theData = {
-            'client_id': theAPIkey,
-            'client_secret': theAPIsecret,
-            'scope': 'CompanyFile',
-            'code': accessCode,
-            'redirect_uri': theAPIredirect,
-            'grant_type': 'authorization_code',
-          }
+					   client_id    : theAPIkey,
+					   client_secret: theAPIsecret,	
+					   code         : accessCode,
+					   redirect_uri : theAPIredirect,
+					   grant_type   : 'authorization_code',
+					   scope		: 'CompanyFile'			  
+          	}
 
           //console.log( $.param( theData)  )
 
-          var response = appEngine.getURL();//oauthServer, 'POST', theData, false)
+          appEngine.getURL( $.param( theData ) );//oauthServer, 'POST', theData, false)
          /*
         console.log( serialize(theData) )
 		
@@ -279,20 +279,13 @@ var appEngine = {
 	}, // getURL */
 
 
-	getURL : function() {
+	getURL : function(theData) {
 
 		   $.ajax({
 				  type: "POST",
 				  url: oauthServer,
 				  contentType: 'application/x-www-form-urlencoded',
-				  data: {
-					   client_id    : theAPIkey,
-					   client_secret: theAPIsecret,	
-					   code         : accessCode,
-					   redirect_uri : theAPIredirect_encoded,
-					   grant_type   : 'authorization_code',
-					   scope		: 'CompanyFile'			  
-				   },
+				  data: theData,
 			    success: function(data) {
 			    	console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
 			    	/* upon sucess, do a callback with the data received */
