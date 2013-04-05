@@ -221,7 +221,7 @@ var appEngine = {
 
 				appEngine.hideAll()
 				$('#main').css('display', 'block')
-				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2></div>' + data)
+				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2></div>' + data.response.error )
 				console.log(data)
 				console.log(data.response.error)
 
