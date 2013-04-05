@@ -282,7 +282,7 @@ var appEngine = {
 				  type: "POST",
 				  url: oauthServer,
 				 // contentType: 'multipart/form-data',
-				  data: theData,
+				  data: 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code',//theData,
 			    success: function(data) {
 			    	console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
 			    	/* upon sucess, do a callback with the data received */
