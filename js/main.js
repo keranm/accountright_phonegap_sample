@@ -167,7 +167,7 @@ var appEngine = {
             'client_secret': theAPIsecret,
             'scope': 'CompanyFile',
             'code': accessCode,
-            'redirect_uri': theAPIredirect_encoded,
+            'redirect_uri': theAPIredirect,
             'grant_type': 'authorization_code',
           }
 
@@ -195,9 +195,9 @@ var appEngine = {
         $.ajax
         ({
 			type: type,
-			url: url+'/?'+theData,
+			url: url,
 			dataType: 'html',
-			data: url+'/?'+theData,
+			data: theData,
 			async: true,
 			success: function(data) {
 				// done, we have the data return it
