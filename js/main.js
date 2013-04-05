@@ -133,7 +133,7 @@ var appEngine = {
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
 
-		    if( loc.indexOf(theAPIredirect + '?code') === 0 ){
+		    if( loc.indexOf(theAPIredirect + '/?code') === 0 ){
 				//console.log('code found')
 				var code = loc.split('?code=')
 				//console.log(code[1])
@@ -149,7 +149,7 @@ var appEngine = {
 				appEngine.getAccessToken()
 
 
-			} else if( loc.indexOf(theAPIredirect + '?error') === 0 ){
+			} else if( loc.indexOf(theAPIredirect + '/?error') === 0 ){
 				// there was an errror - handle it
 				//    error here is the user hit NO instead of YES
 				appEngine.showWelcome( messages.error_oauth_denied )
