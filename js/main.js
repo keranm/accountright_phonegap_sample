@@ -16,7 +16,7 @@
 //
 var theAPIkey = 'ew59q4vmuzss7nuyhm8t7st7'
 var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
-var theAPIredirect = 'http://www.keranmckenzie.com/' // a url that exists but doesn't really
+var theAPIredirect = 'http://www.keranmckenzie.com' // a url that exists but doesn't really
 var theAPIredirect_encoded = encodeURIComponent( theAPIredirect ) // make sure 
 var oauthServer = 'https://secure.myob.com/oauth2/v1/authorize'
 
@@ -173,9 +173,9 @@ var appEngine = {
             'grant_type': 'authorization_code',
           }
 
-          console.log( $.param( theData)  )
+          //console.log( $.param( theData)  )
 
-          var response = appEngine.getURL(oauthServer, 'POST', $.param( theData), false)
+          var response = appEngine.getURL(oauthServer, 'POST', $.param(theData), false)
          /*
         console.log( serialize(theData) )
 		
