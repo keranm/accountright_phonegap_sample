@@ -197,7 +197,7 @@ var appEngine = {
 			type: type,
 			url: url+'/?'+theData,
 			dataType: 'html',
-			data: theData,
+			data: url+'/?'+theData,
 			async: true,
 			success: function(data) {
 				// done, we have the data return it
