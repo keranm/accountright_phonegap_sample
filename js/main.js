@@ -281,7 +281,7 @@ var appEngine = {
 		   $.ajax({
 				  type: "POST",
 				  url: oauthServer,
-				  contentType: 'multipart/form-data',
+				 // contentType: 'multipart/form-data',
 				  data: theData,
 			    success: function(data) {
 			    	console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
