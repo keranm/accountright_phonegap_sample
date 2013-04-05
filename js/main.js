@@ -173,7 +173,7 @@ var appEngine = {
 
         console.log( serialize(theData) )
 		*/
-		var theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+		var theData = 'https://secure.myob.com/oauth2/account/authorize/client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
 
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
 
