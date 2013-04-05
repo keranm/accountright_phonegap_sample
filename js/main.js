@@ -126,7 +126,7 @@ var appEngine = {
 	secureMYOB : function() {
 
 		// we are going to use a childBrowser so we can rip the code out of the URL 
-		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: false, showNavigationBar: false, showAddress: false })
+		window.plugins.childBrowser.showWebPage('https://secure.myob.com/oauth2/account/authorize?client_id='+theAPIkey+'&redirect_uri='+theAPIredirect_encoded+'&response_type=code&scope=CompanyFile', { showLocationBar: true }) //false, showNavigationBar: false, showAddress: false })
 
 		// we have to listen for a location change so we can capture the URL and rip the access code from it
 		window.plugins.childBrowser.onLocationChange = function(loc){ 
@@ -160,20 +160,11 @@ var appEngine = {
 	}, // secureMYOB
 
 	getAccessToken : function() {
-		/*
+		
 		// setup the headers for getting the AccessToken
-		$.ajaxSettings({
-          headers: {
-            'client_id': theAPIkey,
-            'client_secret': theAPIsecret,
-            'scope': 'CompanyFile',
-            'code': accessCode,
-            'redirect_uri': theAPIredirect_encoded,
-            'grant_type': 'authorization_code',
-          }
-        });
-		*/
-        var response = appEngine.getURL(oauthServer, 'POST', false)
+		var theData = oauthServer+'/?client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+		
+        var response = appEngine.getURL(oauthServer, 'POST', theData, false)
 
 	}, // getAccessToken
 
@@ -190,21 +181,14 @@ var appEngine = {
 	}, // getRefreshToken
 
 	// expects headers as bool, url as string
-	getURL : function(url, type, headers) {
+	getURL : function(url, type, theData, headers) {
 
         $.ajax
         ({
 			type: type,
 			url: url,
 			dataType: 'json',
-			headers: {
-	            'client_id': theAPIkey,
-	            'client_secret': theAPIsecret,
-	            'scope': 'CompanyFile',
-	            'code': accessCode,
-	            'redirect_uri': theAPIredirect_encoded,
-	            'grant_type': 'authorization_code',
-	          },
+			data: theData,
 			async: true,
 			success: function(data) {
 				// done, we have the data return it
