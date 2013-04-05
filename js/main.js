@@ -35,7 +35,7 @@ if(localStorage.getItem("accessToken")) {
 
 var theData = ''
 
-//accessCode = 'p2hL!IAAAAAxiQ_wYMNYEMCkuEPT2lklIxrbxxk3nmgc6pKPVmH3BAQEAAAFQQr4X6Qvmm8Wp4suSwpnOkDSdJLoQf7xW8ViU7dhg2F_WyIAO4Qpr3a27YQpMNklzKm8SNLBobHAMkhZ7h3sYbY2JT3NZizjvJL6tP2qvF3enpUbG87VsL7H1DL9nEPM1XPfAFRGLZVuKy52RikcG8UnD-9lYB_D7pPm3Z1pXW2smG6goy0w_KY8GiIem4H40oryqf5h3rAJZo07qEfMKqLXKsBFSjQyrNxyQdbhGTNNavIEsCaKKJ1duEFM0du9NTR7AGcEnOA7gAJ4KaDa2YnvW0FxBzZ_ezmpJdkHwPWKo_N9z7-kKdtnoWJqfAqekIoDB782NFPkxNWHI7hxu'
+accessCode = 'p2hL!IAAAAAxiQ_wYMNYEMCkuEPT2lklIxrbxxk3nmgc6pKPVmH3BAQEAAAFQQr4X6Qvmm8Wp4suSwpnOkDSdJLoQf7xW8ViU7dhg2F_WyIAO4Qpr3a27YQpMNklzKm8SNLBobHAMkhZ7h3sYbY2JT3NZizjvJL6tP2qvF3enpUbG87VsL7H1DL9nEPM1XPfAFRGLZVuKy52RikcG8UnD-9lYB_D7pPm3Z1pXW2smG6goy0w_KY8GiIem4H40oryqf5h3rAJZo07qEfMKqLXKsBFSjQyrNxyQdbhGTNNavIEsCaKKJ1duEFM0du9NTR7AGcEnOA7gAJ4KaDa2YnvW0FxBzZ_ezmpJdkHwPWKo_N9z7-kKdtnoWJqfAqekIoDB782NFPkxNWHI7hxu'
 
 
 // we want to ensure a tight fit on all mobiles, so lets set the sizes right
@@ -56,8 +56,8 @@ var appEngine = {
 		$('.page').css('height', height)
 
 		// show the loading screen
-		appEngine.showLoading( messages.default_loading )
-		//appEngine.getAccessToken()
+		//appEngine.showLoading( messages.default_loading )
+		appEngine.getAccessToken()
 		
 		
 	}, // end our init function
@@ -164,7 +164,7 @@ var appEngine = {
 	getAccessToken : function() {
 		
 		// setup the headers for getting the AccessToken
-		var theData = {
+		/*var theData = {
 					   client_id    : theAPIkey,
 					   client_secret: theAPIsecret,	
 					   code         : accessCode,
@@ -172,16 +172,13 @@ var appEngine = {
 					   grant_type   : 'authorization_code',
 					   scope		: 'CompanyFile'			  
           	}
-
+*/
           //console.log( $.param( theData)  )
+          theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+encodeURIComponent(theAPIredirect)+'&grant_type=authorization_code'
 
-          appEngine.getURL( $.param( theData ) );//oauthServer, 'POST', theData, false)
-         /*
-        console.log( serialize(theData) )
-		
-		
-		theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+encodeURIComponent(theAPIredirect)+'&grant_type=authorization_code'
-
+          appEngine.getURL( theData  );//oauthServer, 'POST', theData, false)
+        
+ /*
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
 
         */
