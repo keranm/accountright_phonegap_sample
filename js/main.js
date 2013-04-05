@@ -173,7 +173,7 @@ var appEngine = {
 
         console.log( serialize(theData) )
 		*/
-		var theData = 'https://secure.myob.com/oauth2/account/authorize/client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+		var theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+theAPIredirect+'&grant_type=authorization_code'
 
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
 
@@ -199,7 +199,7 @@ var appEngine = {
         $.ajax
         ({
 			type: type,
-			url: url,
+			url: oauthServer,
 			data: theData,
 			async: true,
 			success: function(data) {
@@ -218,7 +218,7 @@ var appEngine = {
 				appEngine.hideAll()
 				$('#main').css('display', 'block')
 				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2></div>' + data)
-				console.log(data)
+				console.log(data.response)
 
 				return data
 			}
