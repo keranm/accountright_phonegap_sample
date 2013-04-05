@@ -202,22 +202,22 @@ var appEngine = {
 		theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&refresh_token='+refreshToken+'&grant_type=authorization_code'
 
 	}, // getRefreshToken
-
+	/*
 	// expects headers as bool, url as string
 	getURL : function(url, type, theData, headers) {
 
-		console.log( theData )
+		//console.log( theData )
 
 		$.ajax ({
 			type: 'POST',
 			url: oauthServer,
 			data: {
-	            client_id: theAPIkey,
-	            client_secret: theAPIsecret,
-	            scope: 'CompanyFile',
-	            code: accessCode,
-	            redirect_uri: theAPIredirect,
-	            grant_type: 'authorization_code',
+	            'client_id': theAPIkey,
+	            'client_secret': theAPIsecret,
+	            'scope': 'CompanyFile',
+	            'code': accessCode,
+	            'redirect_uri': theAPIredirect,
+	            'grant_type': 'authorization_code',
 	          },
 	        success: function(data) {
 				// done, we have the data return it
@@ -274,10 +274,43 @@ var appEngine = {
 
 				return data
 			}
-      }); */
+      }); 
 
-	}, // getURL
+	}, // getURL */
 
+
+	getURL : function() {
+
+		   $.ajax({
+				  type: "POST",
+				  url: oauthServer,
+				  data: {
+					   client_id    : theAPIkey,
+					   client_secret: theAPIsecret,	
+					   code         : accessCode,
+					   redirect_uri : theAPIredirect,
+					   grant_type   : 'authorization_code',
+					   scope		: 'CompanyFile'			  
+				   },
+			    success: function(data) {
+			    	console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
+			    	/* upon sucess, do a callback with the data received */
+			    	// temporary storing access token
+			    	appEngine.hideAll()
+					$('#main').css('display', 'block')
+					$('#main #content').html('<h2>Success</h2>'+data)
+					console.log(data)
+
+					return data
+			   	},
+			    error: function(xhr, textStatus) {
+			    	console.log("Token request error ?? >>" + xhr.responseText);
+			    	appEngine.hideAll()
+					$('#main').css('display', 'block')
+					$('#main #content').html('<div class="alert alert-error"><h2>Error</h2>' + xhr.responseText +'</div>sent: ' +theData )
+			    }
+			    });		   
+	   },
 
 } // end our engine
 
