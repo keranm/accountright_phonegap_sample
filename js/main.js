@@ -174,7 +174,8 @@ var appEngine = {
           	}
 */
           //console.log( $.param( theData)  )
-          theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+accessCode+'&redirect_uri='+encodeURIComponent(theAPIredirect)+'&grant_type=authorization_code'
+          theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+          
           console.log(theData)
           appEngine.getURL( theData  );//oauthServer, 'POST', theData, false)
         
@@ -282,7 +283,7 @@ var appEngine = {
 				  type: "POST",
 				  url: oauthServer,
 				 // contentType: 'multipart/form-data',
-				  data: 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code',//theData,
+				  data: theData,
 			    success: function(data) {
 			    	console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
 			    	/* upon sucess, do a callback with the data received */
