@@ -166,25 +166,25 @@ var appEngine = {
 		// setup the data payload for getting the AccessToken
          theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
 
-         if( appEngine.getURL( oauthServer, 'POST', theData, false) ) {
+         appEngine.getURL( oauthServer, 'POST', theData, false) 
          	// done now store in localstorage & move on
          	/*
          	accessToken = localStorage.setItem('accessToken', )
 			accessExpire = localStorage.setItem('accessExpire', )
 			refreshToken = localStorage.setItem('refreshToken', )
-			*/
+			
 
 			
 			$('#main').css('display', 'block')
-			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.accessToken)+'<br />'+JSON.stringify(data.refreshToken)+'<br />'+JSON.stringify(data.expires_in))
+			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(theData.accessToken)+'<br />'+JSON.stringify(theData.refreshToken)+'<br />'+JSON.stringify(theData.expires_in))
 
          } else {
          	// there was an error
          	appEngine.hideAll()
-         	$('#welcome .lead_msg').html( messages.error_oauth_denied )
+         	$('#welcome .lead_msg').html( messages.error_oauth_denied +JSON.stringify(theData)
          	$('#welcome').css('display', 'block')
          }
-        
+        */
  /*
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
 
@@ -207,6 +207,15 @@ var appEngine = {
 
 	}, // getRefreshToken
 
+	processToken : function(data) {
+
+
+			$('#main').css('display', 'block')
+			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.accessToken)+'<br />'+JSON.stringify(data.refreshToken)+'<br />'+JSON.stringify(data.expires_in))
+
+
+	},
+
 
 	getURL : function(url, type, theData, headers) {
 
@@ -217,20 +226,14 @@ var appEngine = {
 				success: function(data) {
 					console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
 					/* upon sucess, do a callback with the data received */
-					// temporary storing access token
-					//appEngine.hideAll()
-					//$('#main').css('display', 'block')
-					//$('#main #content').html('<h2>Success</h2>'+ JSON.stringify(data))
-					theData = data
-					return true
+					appEngine.processToken(data)
 				},
 				error: function(xhr) {
 					console.log("Token request error ?? >>" + xhr.responseText);
-					//appEngine.hideAll()
-					//$('#main').css('display', 'block')
-					//$('#main #content').html('<div class="alert alert-error"><h2>Error</h2>' + xhr.responseText +'</div>sent: ' +theData )
-					theData = xhr.responseText
-					return false
+					// there was an error
+		         	appEngine.hideAll()
+		         	$('#welcome .lead_msg').html( messages.error_oauth_denied +JSON.stringify(data)
+		         	$('#welcome').css('display', 'block')
 				}
 			});		   
 	   },
