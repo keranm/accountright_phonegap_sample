@@ -209,9 +209,9 @@ var appEngine = {
 
 	processToken : function(data) {
 
-
+			appEngine.hideAll()
 			$('#main').css('display', 'block')
-			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.accessToken)+'<br />'+JSON.stringify(data.refreshToken)+'<br />'+JSON.stringify(data.expires_in))
+			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.access_token)+'<br />'+JSON.stringify(data.refresh_token)+'<br />'+JSON.stringify(data.expires_in)+'<br /><br />'+data)
 
 
 	},
