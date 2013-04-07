@@ -177,7 +177,7 @@ var appEngine = {
           //theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
 
           console.log(theData)
-          appEngine.getURL( theData  );//oauthServer, 'POST', theData, false)
+          appEngine.getURL( $.param(theData)  );//oauthServer, 'POST', theData, false)
         
  /*
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
