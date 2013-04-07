@@ -232,7 +232,7 @@ var appEngine = {
 					console.log("Token request error ?? >>" + xhr.responseText);
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#welcome .lead_msg').html( messages.error_oauth_denied +JSON.stringify(data)
+		         	$('#welcome .lead_msg').html( messages.error_oauth_denied + JSON.stringify(data) )
 		         	$('#welcome').css('display', 'block')
 				}
 			});		   
