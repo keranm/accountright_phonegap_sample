@@ -163,21 +163,10 @@ var appEngine = {
 
 	getAccessToken : function() {
 		
-		// setup the headers for getting the AccessToken
-		var theData = {
-					   client_id    : theAPIkey,
-					   client_secret: theAPIsecret,	
-					   code         : decodeURIComponent(accessCode),
-					   redirect_uri : theAPIredirect,
-					   grant_type   : 'authorization_code',
-					   scope		: 'CompanyFile'			  
-          	}
+		// setup the data payload for getting the AccessToken
+         theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
 
-          //console.log( $.param( theData)  )
-          //theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
-
-          console.log(theData)
-          appEngine.getURL( $.param(theData)  );//oauthServer, 'POST', theData, false)
+          appEngine.getURL( oauthServer, 'POST', theData, false)
         
  /*
         var response = appEngine.getURL(oauthServer, 'POST', theData, false)
@@ -200,107 +189,31 @@ var appEngine = {
 		theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&refresh_token='+refreshToken+'&grant_type=authorization_code'
 
 	}, // getRefreshToken
-	/*
-	// expects headers as bool, url as string
+
+
 	getURL : function(url, type, theData, headers) {
 
-		//console.log( theData )
-
-		$.ajax ({
-			type: 'POST',
-			url: oauthServer,
-			data: {
-	            'client_id': theAPIkey,
-	            'client_secret': theAPIsecret,
-	            'scope': 'CompanyFile',
-	            'code': accessCode,
-	            'redirect_uri': theAPIredirect,
-	            'grant_type': 'authorization_code',
-	          },
-	        success: function(data) {
-				// done, we have the data return it
-
-		        appEngine.hideAll()
-				$('#main').css('display', 'block')
-				$('#main #content').html('<h2>Success</h2>'+data)
-				console.log(data)
-
-				return data
-			},
-			error: function(data) {
-				// there was an error - handle it
-
-				console.log(data)
-
-				appEngine.hideAll()
-				$('#main').css('display', 'block')
-				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2>' + data.response +'</div>sent: ' +theData )
-
-
-				return data
-			}
-		}); 
-
-		/*
-        $.ajax
-        ({
-			type: 'POST',
-			url: oauthServer,
-			data: theData,
-			contentType: 'application/x-www-form-urlencoded',
-			dataType: 'json',
-			async: true,
-			success: function(data) {
-				// done, we have the data return it
-
-		        appEngine.hideAll()
-				$('#main').css('display', 'block')
-				$('#main #content').html('<h2>Success</h2>'+data)
-				console.log(data)
-
-				return data
-			},
-			error: function(data) {
-				// there was an error - handle it
-
-				console.log(data)
-
-				appEngine.hideAll()
-				$('#main').css('display', 'block')
-				$('#main #content').html('<div class="alert alert-error"><h2>Error</h2>' + data.response +'</div>sent: ' +theData )
-
-
-				return data
-			}
-      }); 
-
-	}, // getURL */
-
-
-	getURL : function(theData) {
-
 		   $.ajax({
-				  type: "POST",
-				  url: oauthServer,
-				 // contentType: 'multipart/form-data',
-				  data: theData,
-			    success: function(data) {
-			    	console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
-			    	/* upon sucess, do a callback with the data received */
-			    	// temporary storing access token
-			    	appEngine.hideAll()
+				type: type,
+				url: url,
+				data: theData,
+				success: function(data) {
+					console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
+					/* upon sucess, do a callback with the data received */
+					// temporary storing access token
+					appEngine.hideAll()
 					$('#main').css('display', 'block')
 					$('#main #content').html('<h2>Success</h2>'+ JSON.stringify(data))
 
 					return data
-			   	},
-			    error: function(xhr) {
-			    	console.log("Token request error ?? >>" + xhr.responseText);
-			    	appEngine.hideAll()
+				},
+				error: function(xhr) {
+					console.log("Token request error ?? >>" + xhr.responseText);
+					appEngine.hideAll()
 					$('#main').css('display', 'block')
 					$('#main #content').html('<div class="alert alert-error"><h2>Error</h2>' + xhr.responseText +'</div>sent: ' +theData )
-			    }
-			    });		   
+				}
+			});		   
 	   },
 
 } // end our engine
