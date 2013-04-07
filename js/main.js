@@ -164,18 +164,18 @@ var appEngine = {
 	getAccessToken : function() {
 		
 		// setup the headers for getting the AccessToken
-		/*var theData = {
+		var theData = {
 					   client_id    : theAPIkey,
 					   client_secret: theAPIsecret,	
-					   code         : accessCode,
+					   code         : decodeURIComponent(accessCode),
 					   redirect_uri : theAPIredirect,
 					   grant_type   : 'authorization_code',
 					   scope		: 'CompanyFile'			  
           	}
-*/
+
           //console.log( $.param( theData)  )
-          theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
-          
+          //theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
+
           console.log(theData)
           appEngine.getURL( theData  );//oauthServer, 'POST', theData, false)
         
