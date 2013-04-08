@@ -212,8 +212,6 @@ var appEngine = {
 			accessExpire = localStorage.setItem('accessExpire', JSON.stringify(data.refresh_token))
 			refreshToken = localStorage.setItem('refreshToken', secondsTillExpire)
 
-
-			appEngine.hideAll()
 			//$('#main').css('display', 'block')
 			//$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.access_token)+'<br />'+JSON.stringify(data.refresh_token)+'<br />'+JSON.stringify(data.expires_in))
 			appEngine.showMain('cf_list')
@@ -252,7 +250,7 @@ var appEngine = {
 				error: function(xhr) {
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#main').append( messages.error_getting_url )
+		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+xhr)
 		         	$('#main').css('display', 'block')
 		         	return false
 				}
