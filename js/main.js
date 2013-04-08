@@ -241,18 +241,18 @@ var appEngine = {
 				//data: theData,
 				dataType: 'json',
 				//contentType: 'application/json'
-				//headers: {
-				//	'Authorization': "Bearer "+ accessToken,
-			    //    'x-myobapi-cftoken': cfToken,
-			    //    'x-myobapi-key': theAPIkey,
-				//}, 
-				beforeSend: function(xhrObj){
+				headers: {
+					Authorization: 'Bearer '+ accessToken,
+			        'x-myobapi-cftoken': cfToken,
+			        'x-myobapi-key': theAPIkey,
+				}, 
+				/*beforeSend: function(xhrObj){
 		                //xhrObj.setRequestHeader("Content-Type","application/json");
 		                //xhrObj.setRequestHeader("Accept","application/json");
 		                xhrObj.setRequestHeader('Authorization',"Bearer " + accessToken)
 			        	xhrObj.setRequestHeader('x-myobapi-cftoken', cfToken)
 			        	xhrObj.setRequestHeader('x-myobapi-key', theAPIkey)
-		        },
+		        }, */
 				success: function(data) {
 					return(data)
 				},
