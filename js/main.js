@@ -237,7 +237,9 @@ var appEngine = {
 		   $.ajax({
 				type: type,
 				url: url,
-				data: theData,
+				//data: theData,
+				dataType: 'json',
+				//contentType: 'application/json'
 				headers: {
 					'Authorization': 'Bearer '+accessToken,
 			        'x-myobapi-cftoken': cfToken,
