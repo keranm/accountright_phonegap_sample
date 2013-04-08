@@ -36,9 +36,6 @@ if(localStorage.getItem("accessToken")) {
 
 var theData = ''
 
-//accessCode = 'p2hL!IAAAAIM-vWOl4rB3w-igRkXUaLyqPR7xqSV-sD86BaZkW5d2AQEAAAGORB-c1HiB5DJs3z0dbs85YkW9ONPk4g1vg4jMn-s3_cBfON7RO4IiroouQxWW0f7dJMz6l3bhSYwnbZA1_qV2mMT9ZKubF5rvvjnmhdgs6bj8QtEIARZkmbDWGm_R9gjq1R29uTH3UxHlPdCrePS4UCxTE3DLv68nvzyLBU9CrJNhMWh4cO_0BDQeeBtoCpx5bDXtiaAwIlS_KMwT9tW3-7xSWIvzNvQYyYHuhJ5XOFXBatAP68E92PlQYDHgZBGV21p3awwT7X_6x5YKCN3KOJspPOMtRxuoo6BVgEqMkzsCWPLxCdGUJ-SZx4IyXIdzAW-2xx6zhxuUJr2bw1Ok'
-
-
 // we want to ensure a tight fit on all mobiles, so lets set the sizes right
 var width = window.innerWidth
 var height = window.innerHeight // use native JS not any plugin to get the right sizes
@@ -252,7 +249,7 @@ var appEngine = {
 				error: function(xhr) {
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr) )
+		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr.responseText) +'<br />AccessToken: '+accessToken+'<br />RefreshToken: '+refreshToken+'<br />API Key: '+theAPIkey )
 		         	$('#main').css('display', 'block')
 		         	return false
 				}
