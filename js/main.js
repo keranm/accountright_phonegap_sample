@@ -250,7 +250,7 @@ var appEngine = {
 				error: function(xhr) {
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+xhr)
+		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr)
 		         	$('#main').css('display', 'block')
 		         	return false
 				}
