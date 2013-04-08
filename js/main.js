@@ -237,19 +237,22 @@ var appEngine = {
 
 			// fix this
 			cfToken = Base64.encode('Administrator:')//+window.password)
+
+			$.ajaxSetup({
+				headers: {
+					'Authorization': 'Bearer '+ accessToken,
+			        'x-myobapi-cftoken': cfToken,
+			        'x-myobapi-key': theAPIkey,
+				}
+			})
 			
 
 		   $.ajax({
 				type: type,
 				url: url,
-				//data: theData,
+				data: theData,
 				dataType: 'json',
-				//contentType: 'application/json'
-				headers: {
-					'Authorization': 'Bearer '+ accessToken,
-			        'x-myobapi-cftoken': cfToken,
-			        'x-myobapi-key': theAPIkey,
-				}, 
+				contentType: 'application/json',
 				success: function(data) {
 					return(data)
 				},
