@@ -207,9 +207,13 @@ var appEngine = {
 
 
 			// store the data in localstorage
-         	accessToken = localStorage.setItem('accessToken', JSON.stringify(data.access_token))
-			accessExpire = localStorage.setItem('accessExpire', JSON.stringify(data.refresh_token))
-			refreshToken = localStorage.setItem('refreshToken', secondsTillExpire)
+         	localStorage.setItem('accessToken', JSON.stringify(data.access_token))
+			localStorage.setItem('accessExpire', JSON.stringify(data.refresh_token))
+			localStorage.setItem('refreshToken', secondsTillExpire)
+
+			accessToken = JSON.stringify(data.access_token)
+			accessExpire = JSON.stringify(data.refresh_token)
+			refreshToken = secondsTillExpire
 
 			//$('#main').css('display', 'block')
 			//$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.access_token)+'<br />'+JSON.stringify(data.refresh_token)+'<br />'+JSON.stringify(data.expires_in))
