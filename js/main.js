@@ -137,6 +137,8 @@ var appEngine = {
 		switch(purpose) {
 			case 'cf_list':
 				// show the company file list
+				appEngine.hideAll()
+				appEngine.showLoading( messages.cfList_fetching )
 				appEngine.getCFList()
 			break;
 		} // end switch
@@ -250,7 +252,7 @@ var appEngine = {
 				error: function(xhr) {
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr)
+		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr) )
 		         	$('#main').css('display', 'block')
 		         	return false
 				}
@@ -303,7 +305,9 @@ var messages = {
 	
 	'default_loading' : 'Setting Up App',
 
-	'oauth_token_fetching' : 'The Hamsters are off fetching data',
+	'oauth_token_fetching' : 'The Hamsters are off fetching tokens',
+
+	'cfList_fetching' : 'The Hamsters are off getting your company files',
 
 	'error_getting_url' : '<div id="urlError" class="alert alert-error"><strong>Oh Crap</strong><br />Something went wrong - sorry</p>',
 
