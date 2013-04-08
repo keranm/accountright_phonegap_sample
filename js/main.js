@@ -233,6 +233,7 @@ var appEngine = {
 
 			// fix this
 			cfToken = Base64.encode('Administrator:')//+window.password)
+			
 
 		   $.ajax({
 				type: type,
@@ -251,7 +252,7 @@ var appEngine = {
 				error: function(xhr) {
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr.responseText) +'<br />URL '+url +'<br />AccessToken: '+accessToken+'<br />cfToken: '+cfToken+'<br />API Key: '+theAPIkey )
+		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr.responseText) +'<br />URL '+url +'<br />AccessToken: '+accessToken+'<br />cfToken: '+cfToken+'<br />API Key: '+theAPIkey + 'The Error'+JSON.stringify(xhr))
 		         	$('#main').css('display', 'block')
 		         	return false
 				}
