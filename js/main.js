@@ -19,12 +19,13 @@ var theAPIsecret = 'w9Wm3f7te2njWPxbxXrt7Jpn'
 var theAPIredirect = 'http://www.keranmckenzie.com' // a url that exists but doesn't really
 var theAPIredirect_encoded = encodeURIComponent( theAPIredirect ) // make sure 
 var oauthServer = 'https://secure.myob.com/oauth2/v1/authorize'
+var apiURL = 'https://api.myob.com/accountright/'
 
 var accessCode = ''
 // lets fetch the accessToken out of localstorage if we have it
 if(localStorage.getItem("accessToken")) {
 	var accessToken = localStorage.getItem("accessToken")
-	var accessExpire = localStorage.getItem("accessExpire")
+	var accessExpire = localStorage.getItem("accessExpire") // this will be the seconds from EPOC till this token expires
 	var refreshToken = localStorage.getItem("refreshToken")
 	var cfCredentials = localStorage.getItem("cfCredentials")
 } else {
@@ -85,7 +86,7 @@ var appEngine = {
 			$('.loading_msg').html( loading_msg )
 			setTimeout(function() { 
 				$('#loading').css('display', 'none')
-				// right, we are done, show the welcome page
+				// right, we are done 
 				appEngine.showWelcome(null)
 			}, loadingOffset)
 		} else {
@@ -100,6 +101,15 @@ var appEngine = {
 		// first up we need to check in localstorage to see if there are access tokens
 		if(accessToken) {
 			// if YES (there are access tokens) then move straight to getting the list of company files
+			theTime = new Date().getTime / 1000
+
+			if(accessExpire <= theTime) {
+				// token expired
+				appEngine.refreshToken()
+			} else {
+				// show the screen with the list of company files
+				appEngine.showMain('cf_list')
+			}
 
 		} else {
 			// if NO (there are NO access tokens) then show the welcome screen
@@ -120,6 +130,18 @@ var appEngine = {
 		} // end check for accessTokens
 		
 	}, // show Welcome
+
+	showMain : function(purpose) {
+
+		// what are we doing here
+		switch(purpose) {
+			case 'cf_list':
+				// show the company file list
+
+			break;
+		} // end switch
+
+	}, // end show Main
 
 	hideWelcome : function() {
 		$('#welcome').css('display', 'none')
@@ -166,70 +188,88 @@ var appEngine = {
 		// setup the data payload for getting the AccessToken
          theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&scope=CompanyFile&code='+decodeURIComponent(accessCode)+'&redirect_uri='+theAPIredirect_encoded+'&grant_type=authorization_code'
 
-         appEngine.getURL( oauthServer, 'POST', theData, false) 
-         	// done now store in localstorage & move on
-         	/*
-         	accessToken = localStorage.setItem('accessToken', )
-			accessExpire = localStorage.setItem('accessExpire', )
-			refreshToken = localStorage.setItem('refreshToken', )
-			
-
-			
-			$('#main').css('display', 'block')
-			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(theData.accessToken)+'<br />'+JSON.stringify(theData.refreshToken)+'<br />'+JSON.stringify(theData.expires_in))
-
-         } else {
-         	// there was an error
-         	appEngine.hideAll()
-         	$('#welcome .lead_msg').html( messages.error_oauth_denied +JSON.stringify(theData)
-         	$('#welcome').css('display', 'block')
-         }
-        */
- /*
-        var response = appEngine.getURL(oauthServer, 'POST', theData, false)
-
-        */
+         appEngine.getTokenURL( oauthServer, 'POST', theData) 
 
 	}, // getAccessToken
 
 	getRefreshToken : function() {
 		
-        //var response = appEngine.getURL(oauthServer, 'POST', false)
-
-        /*
-        // lets dump out the response
-        appEngine.hideAll()
-		$('#main').css('display', 'block')
-		$('#main #content').html(data)
-		*/
-
+		// setup the payload
 		theData = 'client_id='+theAPIkey+'&client_secret='+theAPIsecret+'&refresh_token='+refreshToken+'&grant_type=authorization_code'
+		appEngine.getTokenURL( oauthServer, 'POST', theData) 
 
 	}, // getRefreshToken
 
 	processToken : function(data) {
 
+			// sort the expiry date - lets work with the epoc
+			secondsTillExpire = new Date().getTime()/1000;
+			secondsTillExpire = secondsTillExpire + ( JSON.stringify(data.expires_in) /2) // expire the token halfway through it's life time
+
+
+			// store the data in localstorage
+         	accessToken = localStorage.setItem('accessToken', JSON.stringify(data.access_token))
+			accessExpire = localStorage.setItem('accessExpire', JSON.stringify(data.refresh_token))
+			refreshToken = localStorage.setItem('refreshToken', secondsTillExpire)
+
+
 			appEngine.hideAll()
 			$('#main').css('display', 'block')
-			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.access_token)+'<br />'+JSON.stringify(data.refresh_token)+'<br />'+JSON.stringify(data.expires_in)+'<br /><br />'+data)
+			$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.access_token)+'<br />'+JSON.stringify(data.refresh_token)+'<br />'+JSON.stringify(data.expires_in))
 
 
 	},
 
+	getCFList : function() {
 
-	getURL : function(url, type, theData, headers) {
+		var theCFList = appEngine.getURL(apiURL, 'GET', '')
+
+		if(theCFList) {
+			appEngine.hideAll()
+         	$('#main').append( JSON.stringify(theCFList) )
+         	$('#main').css('display', 'block')
+		}
+
+	},
+
+	getURL : function(url, type, theData) {
+
+			// fix this
+			cfToken = Base64.encode('Administrator:')//+window.password)
+
+		   $.ajax({
+				type: type,
+				url: url,
+				data: theData,
+				headers: {
+					'Authorization': 'Bearer '+accessToken,
+			        'x-myobapi-cftoken': cfToken,
+			        'x-myobapi-key': theAPIkey,
+				},
+				success: function(data) {
+					return(data)
+				},
+				error: function(xhr) {
+					// there was an error
+		         	appEngine.hideAll()
+		         	$('#main').append( messages.error_getting_url )
+		         	$('#main').css('display', 'block')
+		         	return false
+				}
+			});		   
+	   },
+
+	getTokenURL : function(url, type, theData) {
+
 
 		   $.ajax({
 				type: type,
 				url: url,
 				data: theData,
 				success: function(data) {
-					console.log("Refresh Token Received / Found? >> " + JSON.stringify(data));
-					/* upon sucess, do a callback with the data received */
 					appEngine.processToken(data)
 				},
 				error: function(xhr) {
-					console.log("Token request error ?? >>" + xhr.responseText);
 					// there was an error
 		         	appEngine.hideAll()
 		         	$('#welcome .lead_msg').html( messages.error_oauth_denied + JSON.stringify(data) )
@@ -266,6 +306,8 @@ var messages = {
 	'default_loading' : 'Setting Up App',
 
 	'oauth_token_fetching' : 'The Hamsters are off fetching data',
+
+	'error_getting_url' : '<div id="urlError" class="alert alert-error"><strong>Oh Crap</strong><br />Something went wrong - sorry</p>',
 
 } // end messages
 
