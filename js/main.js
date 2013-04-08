@@ -241,7 +241,7 @@ var appEngine = {
 				dataType: 'json',
 				//contentType: 'application/json'
 				headers: {
-					'Authorization': 'Bearer '+accessToken,
+					'Authorization': "Bearer "+ accessToken,
 			        'x-myobapi-cftoken': cfToken,
 			        'x-myobapi-key': theAPIkey,
 				},
@@ -251,7 +251,7 @@ var appEngine = {
 				error: function(xhr) {
 					// there was an error
 		         	appEngine.hideAll()
-		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr.responseText) +'<br />AccessToken: '+accessToken+'<br />cfToken: '+cfToken+'<br />API Key: '+theAPIkey )
+		         	$('#main').append( messages.error_getting_url + '<br />Error:<br />'+JSON.stringify(xhr.responseText) +'<br />URL '+url +'<br />AccessToken: '+accessToken+'<br />cfToken: '+cfToken+'<br />API Key: '+theAPIkey )
 		         	$('#main').css('display', 'block')
 		         	return false
 				}
