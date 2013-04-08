@@ -137,7 +137,7 @@ var appEngine = {
 		switch(purpose) {
 			case 'cf_list':
 				// show the company file list
-
+				appEngine.getCFList()
 			break;
 		} // end switch
 
@@ -216,7 +216,7 @@ var appEngine = {
 			appEngine.hideAll()
 			//$('#main').css('display', 'block')
 			//$('#main #content').html('<h2>Success</h2>Access Token: '+ JSON.stringify(data.access_token)+'<br />'+JSON.stringify(data.refresh_token)+'<br />'+JSON.stringify(data.expires_in))
-
+			appEngine.showMain('cf_list')
 
 	},
 
