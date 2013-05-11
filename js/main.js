@@ -256,7 +256,7 @@ var appEngine = {
 					'Authorization': 'Bearer '+ accessToken,
 			        'x-myobapi-cftoken': cfToken,
 			        'x-myobapi-key': theAPIkey,
-				}
+				},
 				contentType: 'application/json',
 				success: function(data) {
 					return(data)
