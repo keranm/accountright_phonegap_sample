@@ -2,8 +2,10 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.keranmckenzie.accountrightAPISample"
-        versionCode="10" 
-        version   = "0.0.023">
+        versionCode="01" 
+        version   = "0.0.024">
+
+    <preference name="phonegap-version" value="2.5.0" />
 
     <name>AccountRight PhoneGap Sample</name>
 
