@@ -208,8 +208,8 @@ var appEngine = {
 
 			// store the data in localstorage
          	localStorage.setItem('accessToken', JSON.stringify(data.access_token))
-			localStorage.setItem('accessExpire', JSON.stringify(data.refresh_token))
-			localStorage.setItem('refreshToken', secondsTillExpire)
+			localStorage.setItem('refreshToken', JSON.stringify(data.refresh_token))
+			localStorage.setItem('accessExpire', secondsTillExpire)
 
 			accessToken = JSON.stringify(data.access_token)
 			accessExpire = JSON.stringify(data.refresh_token)
@@ -238,7 +238,16 @@ var appEngine = {
 			// fix this
 			cfToken = Base64.encode('Administrator:')//+window.password)
 
-			
+		
+
+			$.ajaxSetup({
+			    beforeSend: function(xhr) {
+			        xhr.setRequestHeader('Authorization', accessToken);
+			        xhr.setRequestHeader('x-myobapi-cftoken', cfToken);
+			        xhr.setRequestHeader('x-myobapi-key', theAPIkey);
+			    }
+			});
+
 			
 
 		   $.ajax({
